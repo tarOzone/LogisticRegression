@@ -1,0 +1,8 @@
+{
+  "data": "diabetes2_csv.csv",
+  "drop": [
+    "RAND()"
+  ],
+  "target": "Outcome",
+  "test_size": 0.33
+}
