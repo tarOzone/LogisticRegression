@@ -42,7 +42,11 @@ def load_dataset(filename, to_be_dropped, target):
     :return
         X, y
     """
-    df = pd.read_csv(filename)
+    ext = os.path.splitext(filename)[1]
+    if ext == ".csv":
+        df = pd.read_csv(filename)
+    if ext == ".xlsx":
+        df = pd.read_excel(filename)
     df.drop(to_be_dropped, axis=1, inplace=True)
     targets = df[[target]]
     pd.DataFrame.pop(df, target)

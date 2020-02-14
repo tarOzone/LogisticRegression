@@ -1,8 +1,8 @@
 {
-  "data": "diabetes2_csv.csv",
+  "data": "cancer.xlsx",
   "drop": [
-    "RAND()"
+    "ID"
   ],
-  "target": "Outcome",
-  "test_size": 0.33
+  "target": "Diagnosis",
+  "test_size": 0.2
 }
