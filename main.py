@@ -3,8 +3,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import *
 from utils.utils import *
 
-import numpy as np
-
 
 if __name__ == "__main__":
     # load config file from "config/config.json"
