@@ -1,6 +1,7 @@
 import os
 import json
 import pickle
+import numpy as np
 import pandas as pd
 
 from datetime import datetime
@@ -52,6 +53,24 @@ def load_dataset(filename, to_be_dropped, target):
     pd.DataFrame.pop(df, target)
     features = df
     return features, targets
+
+
+def train_test_fixed_split(x_prep, y, _from, _to):
+    '''
+    split data with fixed index
+    :param
+        X_prep: preprocessed feature data
+        y: labels data
+        _from: index from
+        _to: index to
+    :return
+        X_train, X_test, y_train, y_test
+    '''
+    X_train = x_prep[_from:_to + 1, :]
+    X_test = np.delete(x_prep, tuple(i for i in range(_from, _to + 1)), axis=0)
+    y_train = y.loc[_from:_to]
+    y_test = y.drop([i for i in range(_from, _to + 1)], axis=0)
+    return X_train, X_test, y_train, y_test
 
 
 def save_model(model):

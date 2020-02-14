@@ -3,6 +3,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import *
 from utils.utils import *
 
+import numpy as np
+
 
 if __name__ == "__main__":
     # load config file from "config/config.json"
@@ -12,7 +14,15 @@ if __name__ == "__main__":
     data_file = os.path.join("data", config["data"])    # dataset file (default: ./data/diabetes2_csv.csv)
     X, y = load_dataset(data_file, config["drop"], config["target"])    # load dataset using pandas
     X_prep = preprocess_data(X)  # then preprocess the loaded dataset
-    X_train, X_test, y_train, y_test = train_test_split(X_prep, y, test_size=config["test_size"])  # split dataset
+
+    # split dataset
+    if config["test_size"] > 0:
+        X_train, X_test, y_train, y_test = train_test_split(X_prep, y, test_size=config["test_size"])
+    else:
+        _from = config["split_train"]["from"]
+        _to = config["split_train"]["to"]
+        print("[*] Splitting data from", _from, "to", _to)
+        X_train, X_test, y_train, y_test = train_test_fixed_split(X_prep, y, _from, _to)
 
     # prepare the ml model using logistic regression
     model = LogisticRegression()
