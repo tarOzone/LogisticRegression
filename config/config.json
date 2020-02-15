@@ -4,7 +4,7 @@
     "ID"
   ],
   "target": "Diagnosis",
-  "test_size": 0,
+  "test_size": 0.2,
   "split_train": {
     "from": 2,
     "to": 457
